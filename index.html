@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstralNews - NASA & Astrology Portal</title>
+    <style>
+        :root {
+            --space-dark: #0b3d91;
+            --space-black: #03071e;
+            --gold: #f1c40f;
+            --text-light: #f8f9fa;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--space-black);
+            color: var(--text-light);
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: rgba(11, 61, 145, 0.9);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--text-light);
+            color: var(--text-light);
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background-color: var(--gold);
+            color: var(--space-black);
+            border-color: var(--gold);
+        }
+
+        /* Main Layout */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://nasa.gov') center/cover;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            border: 1px solid #333;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        /* Grid Sections */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background-color: #161a1d;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #2b2d42;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-tag {
+            background-color: var(--space-dark);
+            color: white;
+            padding: 3px 8px;
+            font-size: 12px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+            color: var(--gold);
+        }
+
+        /* NASA Live Updates Section */
+        .nasa-stream {
+            background-color: #0e1116;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 5px solid var(--space-dark);
+            margin-bottom: 50px;
+        }
+
+        /* Q&A Form */
+        .contact-section {
+            background-color: #161a1d;
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid #2b2d42;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-section h2 {
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            background-color: #0b0c10;
+            border: 1px solid #45f3ff;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--space-dark);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            font-weight: bold;
+            transition: 0.3s;
+            border: 1px solid var(--gold);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--gold);
+            color: var(--space-black);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #0b0c10;
+            margin-top: 60px;
+            border-top: 1px solid #222;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & 7 dildə menyu -->
+    <header>
+        <a href="#" class="logo">ASTRALNEWS</a>
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="changeLang('az')">AZ</button>
+            <button class="lang-btn" onclick="changeLang('en')">EN</button>
+            <button class="lang-btn" onclick="changeLang('tr')">TR</button>
+            <button class="lang-btn" onclick="changeLang('ru')">RU</button>
+            <button class="lang-btn" onclick="changeLang('fr')">FR</button>
+            <button class="lang-btn" onclick="changeLang('de')">DE</button>
+            <button class="lang-btn" onclick="changeLang('it')">IT</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero banner -->
+        <div class="hero">
+            <h1 id="hero-title">Kosmos və Astrologiya Dünyası</h1>
+            <p id="hero-desc">NASA-nın rəsmi görüntüləri və kainatın dərinliklərindən ən son yeniliklər.</p>
+        </div>
+
+        <!-- Canlı/Tez-tez dəyişən NASA məlumat bloku -->
+        <div class="nasa-stream">
+            <h2 id="stream-title">🚀 NASA Canlı Data Feed (Tez-tez Yenilənən)</h2>
+            <p id="stream-desc">Kainatın xəritələnməsi, yeni kəşf edilmiş eksoplanetlər və kosmik teleskoplardan gələn rəsmi telemetriya məlumatları.</p>
+            <p><strong>Status:</strong> <span style="color: #2ecc71;">● Online</span> | <strong>Mənbə:</strong> NASA Data Center</p>
+        </div>
+
+        <!-- Məlumat və Fotolar Grid-i -->
+        <div class="grid">
+            <!-- Kart 1 -->
+            <div class="card">
+                <img src="https://nasa.gov" alt="NASA Hubble">
+                <div class="card-content">
+                    <span class="card-tag">NASA Official</span>
+                    <h3 class="card-h-1">Dərin Kosmos Görüntüləri</h3>
+                    <p class="card-p-1">Hubble və James Webb teleskopları vasitəsilə dumanlıqların və uzaq qalaktikaların yüksək keyfiyyətli rəsmi fotoları.</p>
+                </div>
+            </div>
+
+            <!-- Kart 2 -->
+            <div class="card">
+                <img src="https://nasa.gov" alt="Artemis Mission">
+                <div class="card-content">
+                    <span class="card-tag">Missions</span>
+                    <h3 class="card-h-2">Artemis Ay Missiyası</h3>
+                    <p class="card-p-2">NASA-nın insanlığı yenidən Aya və daha sonra Marsa aparacaq rəsmi proqramı haqqında son hesabatlar.</p>
+                </div>
+            </div>
+
+            <!-- Kart 3 -->
+            <div class="card">
+                <img src="https://nasa.gov" alt="Astrology Constellations">
+                <div class="card-content">
+                    <span class="card-tag">Astrology</span>
+                    <h3 class="card-h-3">Bürclər və Planetlər</h3>
+                    <p class="card-p-3">Planetlərin kosmik hərəkətlərinin və ulduz xəritələrinin astronomik dataya əsaslanan analizi.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sual Göndərmə Forması (astolognews@gmail.com ünvanına göndərir) -->
+        <div class="contact-section">
+            <h2 id="form-title">Astroloqa və ya Kosmik Ekspertə Sual Verin</h2>
+            <form action="https://formspree.io" method="POST"> 
+                <!-- Qeyd: formspree və ya birbaşa mailto istifadə oluna bilər. Rəsmi olaraq arxa planda işləməsi üçün bura action əlavə edilib -->
+                <input type="hidden" name="_to" value="astolognews@gmail.com">
+                
+                <div class="form-group">
+                    <label id="lbl-name" for="name">Adınız və Soyadınız:</label>
+                    <input type="text" id="name" name="name" required placeholder="Məs: Əli Yılmaz">
+                </div>
+
+                <div class="form-group">
+                    <label id="lbl-email" for="email">E-poçt Ünvanınız:</label>
+                    <input type="email" id="email" name="email" required placeholder="name@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label id="lbl-msg" for="message">Sualınız:</label>
+                    <textarea id="message" name="message" required placeholder="Kosmos və ya bürclər haqqında sualınızı bura yazın..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn" id="btn-submit">Sualı Göndər</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+© 2026 AstralNews Portal. All rights reserved. Powered by NASA Open API Concepts.
+const translations = {
+az: {
+heroTitle: "Kosmos və Astrologiya Dünyası",
+heroDesc: "NASA-nın rəsmi görüntüləri və kainatın dərinliklərindən ən son yeniliklər.",
+streamTitle: "🚀 NASA Canlı Data Feed (Tez-tez Yenilənən)",
+streamDesc: "Kainatın xəritələnməsi, yeni kəşf edilmiş eksoplanetlər və kosmik teleskoplardan gələn rəsmi telemetriya məlumatları.",
+cardH1: "Dərin Kosmos Görüntüləri",
+cardP1: "Hubble və James Webb teleskopları vasitəsilə dumanlıqların və uzaq qalaktikaların yüksək keyfiyyətli rəsmi fotoları.",
+cardH2: "Artemis Ay Missiyası",
+cardP2: "NASA-nın insanlığı yenidən Aya və daha sonra Marsa aparacaq rəsmi proqramı haqqında son hesabatlar.",
+cardH3: "Bürclər və Planetlər",
+cardP3: "Planetlərin kosmik hərəkətlərinin və ulduz xəritələrinin astronomik dataya əsaslanan analizi.",
+formTitle: "Astroloqa və ya Kosmik Ekspertə Sual Verin",
+lblName: "Adınız və Soyadınız:",
+lblEmail: "E-poçt Ünvanınız:",
+lblMsg: "Sualınız:",
+btnSubmit: "Sualı Göndər"
+},
+en: {
+heroTitle: "World of Space & Astrology",
+heroDesc: "Official NASA imagery and the latest updates from the depths of the universe.",
+streamTitle: "🚀 NASA Live Data Feed (Frequently Updated)",
+streamDesc: "Mapping the universe, newly discovered exoplanets, and official telemetry data from space telescopes.",
+cardH1: "Deep Space Imagery",
+cardP1: "High-quality official photos of nebulas and distant galaxies via Hubble and James Webb telescopes.",
+cardH2: "Artemis Moon Mission",
+cardP2: "Latest reports on NASA's official program to bring humanity back to the Moon and then to Mars.",
+cardH3: "Constellations & Planets",
+cardP3: "Astronomical data-driven analysis of cosmic movements of planets and star charts.",
+formTitle: "Ask a Question to an Astrologer or Space Expert",
+lblName: "Full Name:",
+lblEmail: "Your Email Address:",
+lblMsg: "Your Question:",
+btnSubmit: "Send Question"
+},
+tr: {
+heroTitle: "Uzay ve Astroloji Dünyası",
+heroDesc: "NASA'nın resmi görüntüleri ve evrenin derinliklerinden en son güncellemeler.",
+streamTitle: "🚀 NASA Canlı Veri Akışı (Sık Güncellenir)",
+streamDesc: "Evrenin haritalanması, yeni keşfedilen ötegezegenler ve uzay teleskoplarından gelen resmi telemetri verileri.",
+cardH1: "Derin Uzay Görüntüleri",
+cardP1: "Hubble ve James Webb teleskopları aracılığıyla nebulaların ve uzak galaksilerin yüksek kaliteli resmi fotoğrafları.",
+cardH2: "Artemis Ay Misyonu",
+cardP2: "İnsanlığı yeniden Ay'a ve ardından Mars'a taşıyacak resmi NASA programına ilişkin son raporlar.",
+cardH3: "Burçlar ve Gezegenler",
+cardP3: "Gezegenlerin kozmik hareketlerinin ve yıldız haritalarının astronomik verilere dayalı analizi.",
+formTitle: "Bir Astroloğa veya Uzay Uzmanına Soru Sorun",
+lblName: "Adınız ve Soyadınız:",
+lblEmail: "E-posta Adresiniz:",
+lblMsg: "Sorunuz:",
+btnSubmit: "Soruyu Gönder"
+},
+ru: {
+heroTitle: "Мир Космоса и Астрологии",
+heroDesc: "Официальные снимки NASA и последние обновления из глубин вселенной.",
+streamTitle: "🚀 Живая лента данных NASA (Часто обновляется)",
+streamDesc: "Картирование вселенной, новооткрытые экзопланеты и официальные телеметрические данные с космических телескопов.",
+cardH1: "Снимки глубокого космоса",
+cardP1: "Высококачественные официальные фотографии туманностей и далеких галактик с телескопов Хаббл и Джеймс Уэбб.",
+cardH2: "Лунная миссия Артемида",
+cardP2: "Последние отчеты об официальной программе NASA по возвращению человечества на Луну и далее на Марс.",
+cardH3: "Созвездия и Планеты",
+cardP3: "Анализ космических движений планет и звездных карт на основе астрономических данных.",
+formTitle: "Задать вопрос астрологу или эксперту по космосу",
+lblName: "Ваше Имя:",
+lblEmail: "Ваш Email:",
+lblMsg: "Ваш Вопрос:",
+btnSubmit: "Отправить Вопрос"
+},
+fr: {
+heroTitle: "Monde de l'Espace & de l'Astrologie",
+heroDesc: "Images officielles de la NASA et dernières mises à jour depuis les profondeurs de l'univers.",
+streamTitle: "🚀 Flux de données en direct de la NASA (Mis à jour fréquemment)",
+streamDesc: "Cartographie de l'univers, exoplanètes nouvellement découvertes et données télémétriques officielles des télescopes spatiaux.",
+cardH1: "Imagerie de l'espace lointain",
+cardP1: "Photos officielles de haute qualité de nébuleuses et de galaxies lointaines via les télescopes Hubble и James Webb.",
+cardH2: "Mission lunaire Artemis",
+cardP2: "Derniers rapports sur le programme officiel de la NASA visant à ramener l'humanité sur la Lune, puis sur Mars.",
+cardH3: "Constellations & Planètes",
+cardP3: "Analyse basée sur des données astronomiques des mouvements cosmiques des planètes et des cartes du ciel.",
+formTitle: "Poser une question à un astrologue ou un expert de l'espace",
+lblName: "Nom complet:",
+lblEmail: "Adresse e-mail:",
+lblMsg: "Votre question:",
+btnSubmit: "Envoyer la question"
+},
+de: {
+heroTitle: "Welt des Weltraums & der Astrologie",
+heroDesc: "Offizielle NASA-Bilder und die neuesten Updates aus den Tiefen des Universums.",
+streamTitle: "🚀 NASA Live-Daten-Feed (Häufig aktualisiert)",
+streamDesc: "Kartierung des Universums, neu entdeckte Exoplaneten und offizielle Telemetriedaten von Weltraumteleskopen.",
+cardH1: "Deep-Space-Bilder",
+cardP1: "Hochwertige offizielle Fotos von Nebeln und fernen Galaxien über die Teleskope Hubble und James Webb.",
+cardH2: "Artemis-Mondmission",
+cardP2: "Neueste Berichte über das offizielle NASA-Programm, das die Menschheit zurück zum Mond und dann zum Mars bringen soll.",
+cardH3: "Sternbilder & Planeten",
+cardP3: "Astronomische datengestützte Analyse der kosmischen Bewegungen von Planeten und Sternenkarten.",
+formTitle: "Stellen Sie einem Astrologen oder Weltraumexperten eine Frage",
+lblName: "Vollständiger Name:",
+lblEmail: "E-Mail-Adresse:",
+lblMsg: "Ihre Frage:",
+btnSubmit: "Frage senden"
+},
+it: {
+heroTitle: "Mondo dello Spazio e dell'Astrologia",
+heroDesc: "Immagini ufficiali della NASA e gli ultimi aggiornamenti dalle profondità dell'universo.",
+streamTitle: "🚀 Feed di dati in diretta della NASA (Aggiornato frequentemente)",
+streamDesc: "Mappatura dell'universo, esopianeti scoperti di recente e dati telemetrici ufficiali dai telescopi spaziali.",
+cardH1: "Immagini dello spazio profondo",
+cardP1: "Foto ufficiali di alta qualità di nebulose e galassie lontane tramite i telescopi Hubble e James Webb.",
+cardH2: "Missione lunare Artemis",
+cardP2: "Ultimi rapporti sul programma ufficiale della NASA per riportare l'umanità sulla Luna e poi su Mars.",
+cardH3: "Costellazioni e Pianeti",
+cardP3: "Analisi basata su dati astronomici dei movimenti cosmici dei pianeti e delle mappe stellari.",
+formTitle: "Fai una domanda a un astrologo o a un esperto di spazio",
+lblName: "Nome e Cognome:",
+lblEmail: "Indirizzo e-mail:",
+lblMsg: "La tua domanda:",
+btnSubmit: "Invia Domanda"
+}
+};
+function changeLang(lang) {
+// Aktiv düymə stilini dəyişmək
+document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+event.target.classList.add('active');
+// Mətnləri dəyişmək
+document.getElementById('hero-title').innerText = translations[lang].heroTitle;
+document.getElementById('hero-desc').innerText = translations[lang].heroDesc;
+document.getElementById('stream-title').innerText = translations[lang].streamTitle;
+document.getElementById('stream-desc').innerText = translations[lang].streamDesc;
+document.querySelector('.card-h-1').innerText = translations[lang].cardH1;
+document.querySelector('.card-p-1').innerText = translations[lang].cardP1;
+document.querySelector('.card-h-2').innerText = translations[lang].cardH2;
+document.querySelector('.card-p-2').innerText = translations[lang].cardP2;
+document.querySelector('.card-h-3').innerText = translations[lang].cardH3;
+document.querySelector('.card-p-3').innerText = translations[lang].cardP3;
+document.getElementById('form-title').innerText = translations[lang].formTitle;
+document.getElementById('lbl-name').innerText = translations[lang].lblName;
+document.getElementById('lbl-email').innerText = translations[lang].lblEmail;
+document.getElementById('lbl-msg').innerText = translations[lang].lblMsg;
+document.getElementById('btn-submit').innerText = translations[lang].btnSubmit;
+}
